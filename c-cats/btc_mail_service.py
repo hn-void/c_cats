@@ -38,6 +38,8 @@ latest_btc = handle_data.read_latest_btc(file_name=FILE_NAME)
 current_price = latest_btc['quote'][CONVERT]['price']
 percent_change_1h = latest_btc['quote'][CONVERT]['percent_change_1h']
 last_updated = latest_btc['quote'][CONVERT]['last_updated']
+print('[c-cats]\t', last_updated)
+print('[c-cats]\t', current_price)
 
 mail_flag = 0
 body = last_updated + '\n'
