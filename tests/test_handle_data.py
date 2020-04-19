@@ -1,9 +1,6 @@
-import json
 import os
-import sys
 from unittest import TestCase
 
-sys.path.append(os.path.join(os.path.dirname(__file__), '../'))
 from c_cats.handle_data import read_latest_btc
 
 
