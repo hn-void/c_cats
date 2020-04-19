@@ -29,7 +29,7 @@ def get_price_from_coinmarketcap(file_name, api_key, url, limit, convert):
                 ensure_ascii=False,
                 indent=4, sort_keys=True,
                 separators=(',', ': '))
-        print('[c-cats]\tUpdated crypto_currency_data.json')
+        print('[c-cats]\tUpdated', file_name)
     except (ConnectionError, Timeout, TooManyRedirects) as e:
         print(e)
 
