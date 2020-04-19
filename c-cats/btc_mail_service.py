@@ -43,10 +43,10 @@ mail_flag = 0
 body = last_updated + '\n'
 body += str(current_price) + 'JPY/BTC\n'
 if current_price > THRESHOLD_UPPER:
-    body += 'c( ◠∞◠ c)<Bitcoinが 800000 JPY/BTC を上回りました．\n'
+    body += 'c( ◠∞◠ c)<Bitcoinが ' + str(THRESHOLD_UPPER) + ' JPY/BTC を上回りました．\n'
     mail_flag = 1
 elif current_price < THRESHOLD_LOWER:
-    body += 'c( ◠∞◠ c)<Bitcoinが 600000 JPY/BTC を下回りました．\n'
+    body += 'c( ◠∞◠ c)<Bitcoinが ' + str(THRESHOLD_LOWER) + ' JPY/BTC を下回りました．\n'
     mail_flag = 1
 if math.fabs(percent_change_1h) > THRESHOLD_PERCENTAGE_1h:
     body += 'c( ◠∞◠ c)<Bitcoinの値段が大きく変動しています(' + percent_change_1h + '%)．\n'
