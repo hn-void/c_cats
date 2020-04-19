@@ -1,0 +1,18 @@
+import json
+import os
+import sys
+from unittest import TestCase
+
+sys.path.append(os.path.join(os.path.dirname(__file__), '../'))
+from c_cats.handle_data import read_latest_btc
+
+
+class TestReadLatestBTC(TestCase):
+
+    def setUp(self):
+        self.test_data = read_latest_btc(os.path.dirname(__file__)+'/test_data/test_crypto_data.json')
+
+    def test_read_latest_btc(self):
+        self.assertEqual(self.test_data['id'], 1)
+        self.assertEqual(self.test_data['quote']['JPY']['last_updated'], '2020-04-01')
+        self.assertEqual(self.test_data['slug'], 'hoge')

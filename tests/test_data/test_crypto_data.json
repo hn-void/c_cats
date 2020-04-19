@@ -1,0 +1,60 @@
+{
+    "data": [
+        {
+            "circulating_supply": 100.0,
+            "cmc_rank": 1,
+            "date_added": "2013-04-01",
+            "id": 1,
+            "last_updated": "2020-04-01",
+            "max_supply": 1000,
+            "name": "Hoge",
+            "num_market_pairs": 100,
+            "platform": null,
+            "quote": {
+                "JPY": {
+                    "last_updated": "2020-04-01",
+                    "market_cap": 1000.0,
+                    "percent_change_1h": 0.05,
+                    "percent_change_24h": 0.5,
+                    "percent_change_7d": 5.0,
+                    "price": 1000000.0,
+                    "volume_24h": 10000000.0
+                }
+            },
+            "slug": "hoge",
+            "symbol": "HG",
+            "tags": [
+                "mineable"
+            ],
+            "total_supply": 210000
+        },
+        {
+            "circulating_supply": 200.0,
+            "cmc_rank": 2,
+            "date_added": "2015-05-01",
+            "id": 2,
+            "last_updated": "2020-05-01",
+            "max_supply": null,
+            "name": "Fuga",
+            "num_market_pairs": 200,
+            "platform": null,
+            "quote": {
+                "JPY": {
+                    "last_updated": "2020-04-01",
+                    "market_cap": 2000.0,
+                    "percent_change_1h": 0.1,
+                    "percent_change_24h": 1.0,
+                    "percent_change_7d": 10.0,
+                    "price": 2000000.0,
+                    "volume_24h": 20000000.0
+                }
+            },
+            "slug": "fuga",
+            "symbol": "FG",
+            "tags": [
+                "mineable"
+            ],
+            "total_supply": 420000
+        }
+    ]
+}
