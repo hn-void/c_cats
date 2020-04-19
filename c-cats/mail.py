@@ -17,9 +17,9 @@ def send_mail(from_addr, password, to_addr, msg):
     try:
         # Login
         smtpobj = smtplib.SMTP('smtp.gmail.com', 587)
-        smtpobj.ehlp()
+        smtpobj.ehlo()
         smtpobj.starttls()
-        smtpobj.ehlp()
+        smtpobj.ehlo()
         smtpobj.login(from_addr, password)
         # Send
         smtpobj.sendmail(from_addr, to_addr, msg.as_string())
