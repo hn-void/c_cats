@@ -9,9 +9,9 @@ Edit here ↓
 """""""""""""""
 FILE_NAME = 'crypto_currency_data.json'
 API_KEY = 'YOUR_COINMARKETCAP_API_KEY'
-URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest'
-LIMIT = 100
+URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 CONVERT = 'JPY'
+SYMBOL = 'BTC'
 
 FROM_ADDR = 'YOUR_EMAIL'
 FROM_ADDR_PASSWORD = 'PASSWORD'
@@ -31,9 +31,9 @@ handle_data.get_price_from_coinmarketcap(
     file_name=FILE_NAME,
     api_key=API_KEY,
     url=URL,
-    limit=LIMIT,
-    convert=CONVERT)
-latest_btc = handle_data.read_latest_btc(file_name=FILE_NAME)
+    convert=CONVERT,
+    symbol=SYMBOL)
+latest_btc = handle_data.read_latest_btc(file_name=FILE_NAME, symbol=SYMBOL)
 
 current_price = latest_btc['quote'][CONVERT]['price']
 percent_change_1h = latest_btc['quote'][CONVERT]['percent_change_1h']

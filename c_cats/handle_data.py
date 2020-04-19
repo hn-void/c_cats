@@ -3,12 +3,12 @@ from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
 import json
 
 
-def get_price_from_coinmarketcap(file_name, api_key, url, limit, convert):
+# Using Free Tier
+def get_price_from_coinmarketcap(file_name, api_key, url, convert, symbol):
 
     parameters = {
-        'start': 1,
-        'limit': limit,
-        'convert': convert
+        'convert': convert,
+        'symbol': symbol
     }
 
     headers = {
@@ -34,8 +34,8 @@ def get_price_from_coinmarketcap(file_name, api_key, url, limit, convert):
         print(e)
 
 
-def read_latest_btc(file_name):
+def read_latest_btc(file_name, symbol):
     with open(file_name, 'r') as input_file:
         data = json.load(input_file)
         values = data['data']
-        return values[0]
+        return values[symbol]
