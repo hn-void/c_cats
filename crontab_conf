@@ -1,2 +1,2 @@
 MAILTO=""
-0 * * * * cd /home/ec2-user/c-cats/; echo ---------- >> cronlog; data >> cronlog; bash -l -c "python3 /home/ec2-user/c-cats/btc_mail_service.py" >> cronlog; echo ---------- >> cronlog;
+0 * * * * cd /home/ec2-user/c_cats/; echo ---------- >> cronlog; data >> cronlog; bash -l -c "python3 /home/ec2-user/c_cats/btc_mail_alert.py" >> cronlog; echo ---------- >> cronlog;
