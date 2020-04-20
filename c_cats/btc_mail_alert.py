@@ -7,7 +7,7 @@ import mail
 """""""""""""""
 Edit here ↓
 """""""""""""""
-FILE_NAME = 'crypto_currency_data.json'
+FILE_NAME = 'btc_data/btc_latest.json'
 API_KEY = 'YOUR_COINMARKETCAP_API_KEY'
 URL = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
 CONVERT = 'JPY'
