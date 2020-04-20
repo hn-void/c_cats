@@ -25,7 +25,7 @@ THRESHOLD_PERCENTAGE_1h = 5
 Edit here ↑
 """""""""""""""
 
-print('[c-cats]\tWelcome to c-cats simple mail service')
+print('[c_cats]\tWelcome to c-cats simple mail service')
 
 handle_data.get_price_from_coinmarketcap(
     file_name=FILE_NAME,
@@ -38,8 +38,8 @@ latest_btc = handle_data.read_latest_btc(file_name=FILE_NAME, symbol=SYMBOL)
 current_price = latest_btc['quote'][CONVERT]['price']
 percent_change_1h = latest_btc['quote'][CONVERT]['percent_change_1h']
 last_updated = latest_btc['quote'][CONVERT]['last_updated']
-print('[c-cats]\t', last_updated)
-print('[c-cats]\t', current_price)
+print('[c_cats]\t', last_updated)
+print('[c_cats]\t', current_price)
 
 mail_flag = 0
 body = last_updated + '\n'
@@ -58,6 +58,6 @@ if mail_flag == 1:
     for to_addr in TO_ADDRS:
         msg = mail.create_mail(FROM_ADDR, to_addr, SUBJECT, body)
         mail.send_mail(FROM_ADDR, FROM_ADDR_PASSWORD, to_addr, msg)
-    print('[c-cats]\tSent emails')
+    print('[c_cats]\tSent emails')
 else:
-    print('[c-cats]\tNot send emails')
+    print('[c_cats]\tNot send emails')
