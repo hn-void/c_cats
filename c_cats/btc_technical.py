@@ -1,11 +1,15 @@
 import math
 import os
+import time
 
 import pandas as pd
 
 import handle_data
 import technical
 
+
+os.environ['TZ'] = 'UTC'
+time.tzset()
 
 FILE_NAME = 'btc_data/btc_historical.csv'
 
