@@ -1,3 +1,4 @@
+import math
 import os
 
 import pandas as pd
@@ -33,11 +34,11 @@ signal = signal_buy - signal_sell
 Edit here
 """""""""
 
-signal_today = signal.iloc[-1]
+signal_today = signal.iloc[-1].values[0]
 print(signal_today)
-if signal_today[0] == -1.0:
-    print('[c_cats]\tYou have better sell BTC today')
-elif signal_today[0] == 1.0:
-    print('[c_cats]\tYou have better buy BTC today')
+if signal_today > 0:
+    print('[c_cats]\tYou had better sell', signal_today, 'BTC today')
+elif signal_today < 0:
+    print('[c_cats]\tYou had better buy', math.fabs(signal_today), 'BTC today')
 else:
-    print('[c_cats]\tYou don\'t have to trade BTC today')
+    print('[c_cats] You don\'t have to trade BTC today')
