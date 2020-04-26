@@ -5,7 +5,6 @@ $ pwd
 /Users/your_name/c_cats/c_cats
 
 $ python3 btc_technical.py
-c_cats| python btc_technical.py
 [c_cats] LAST_DATE: 20200426
 [c_cats] TODAY_DATE: 20200426
 --------------------------------------------------------------------------------
@@ -22,3 +21,5 @@ FINISH JPY: 497012 BTC: 10.0 TOTAL: 7646882
 --------------------------------------------------------------------------------
 [c_cats] You had better buy 3.0 BTC today
 ```
+
+![result_example.png](/docs/result_example.png)
