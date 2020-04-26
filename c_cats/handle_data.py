@@ -11,8 +11,8 @@ def is_latest(file_name):
     latest_date = pd.read_csv(file_name).tail(1)
     latest_date = latest_date.values.tolist()[0][8].split(' ')[0].replace('-', '')
     date_today = str(datetime.date.today()).replace('-', '')
-    print('[c_cats]\tLAST_DATE: ' + latest_date)
-    print('[c_cats]\tTODAY_DATE: ' + date_today)
+    print('[c_cats] LAST_DATE: ' + latest_date)
+    print('[c_cats] TODAY_DATE: ' + date_today)
     return int(latest_date) == int(date_today)
 
 
@@ -60,7 +60,7 @@ def get_price_from_coinmarketcap(file_name, api_key, url, convert, symbol):
                 ensure_ascii=False,
                 indent=4, sort_keys=True,
                 separators=(',', ': '))
-        print('[c-cats]\tUpdated', file_name)
+        print('[c_cats] Updated', file_name)
     except (ConnectionError, Timeout, TooManyRedirects) as e:
         print(e)
 
