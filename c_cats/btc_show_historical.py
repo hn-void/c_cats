@@ -3,7 +3,7 @@ import time
 
 import pandas as pd
 
-import handle_data
+from btc_utils import handle_data
 
 
 os.environ['TZ'] = 'UTC'

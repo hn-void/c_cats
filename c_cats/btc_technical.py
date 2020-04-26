@@ -4,9 +4,7 @@ import time
 
 import pandas as pd
 
-import handle_data
-import simulation
-import technical
+from btc_utils import handle_data, simulation, technical
 
 
 os.environ['TZ'] = 'UTC'

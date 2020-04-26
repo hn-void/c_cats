@@ -1,7 +1,7 @@
 import os
 from unittest import TestCase
 
-from c_cats.handle_data import read_latest_btc
+from c_cats.btc_utils.handle_data import read_latest_btc
 
 
 class TestReadLatestBTC(TestCase):
