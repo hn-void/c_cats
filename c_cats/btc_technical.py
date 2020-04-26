@@ -36,9 +36,19 @@ est_buy, est_sell = technical.ma_estrangement(btc_df, term=25, band_width=0.1)
 cci_buy, cci_sell = technical.commodity_channel_index(btc_df, term=21, follower=100, contrarian=200)
 rsi_buy, rsi_sell = technical.relative_strength_index(btc_df, term=14, follower=20, contrarian=40)
 
+# Sample Signal 1
 # signal_df = ima_buy + bband_buy + macd_buy + est_buy + cci_buy + rsi_buy
 # signal_df = signal_df - ima_sell - bband_sell - macd_sell - est_sell - cci_sell - rsi_sell
-signal_df = ima_buy + est_buy + rsi_buy - bband_sell - cci_sell - macd_sell
+# signal_df[(signal_df <= 1.0) & (signal_df >= -1.0)] = 0.0
+# signal_df[signal_df > 1.0] = 2.0
+# signal_df[signal_df < -1.0] = -2.0
+
+# Sample Signal 2
+# signal_df = ima_buy + est_buy + rsi_buy - bband_sell - cci_sell - macd_sell
+
+# Sample Signal 3
+signal_df = macd_buy - macd_sell
+
 """""""""
 Edit here
 """""""""
