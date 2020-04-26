@@ -5,6 +5,7 @@ import time
 import pandas as pd
 
 import handle_data
+import simulation
 import technical
 
 
@@ -35,17 +36,21 @@ est_buy, est_sell = technical.ma_estrangement(btc_df, term=25, band_width=0.1)
 cci_buy, cci_sell = technical.commodity_channel_index(btc_df, term=21, follower=100, contrarian=200)
 rsi_buy, rsi_sell = technical.relative_strength_index(btc_df, term=14, follower=20, contrarian=40)
 
-signal = ima_buy + bband_buy + macd_buy + est_buy + cci_buy + rsi_buy
-signal = signal - ima_sell - bband_sell - macd_sell - est_sell - cci_sell - rsi_sell
+# signal_df = ima_buy + bband_buy + macd_buy + est_buy + cci_buy + rsi_buy
+# signal_df = signal_df - ima_sell - bband_sell - macd_sell - est_sell - cci_sell - rsi_sell
+signal_df = ima_buy + est_buy + rsi_buy - bband_sell - cci_sell - macd_sell
 """""""""
 Edit here
 """""""""
 
-signal_today = signal.iloc[-1].values[0]
-print(signal_today)
+print('-'*80)
+simulation.simulate(10000000, btc_df=btc_df, signal_df=signal_df)
+print('-'*80)
+
+signal_today = signal_df.iloc[-1].values[0]
 if signal_today > 0:
-    print('[c_cats]\tYou had better buy', signal_today, 'BTC today')
+    print('[c_cats] You had better buy', signal_today, 'BTC today')
 elif signal_today < 0:
-    print('[c_cats]\tYou had better sell', math.fabs(signal_today), 'BTC today')
+    print('[c_cats] You had better sell', math.fabs(signal_today), 'BTC today')
 else:
     print('[c_cats] You don\'t have to trade BTC today')
