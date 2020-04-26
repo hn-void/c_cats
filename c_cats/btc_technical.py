@@ -25,7 +25,7 @@ btc_df = pd.read_csv(FILE_NAME)
 
 
 """""""""
-Edit here, make signals
+Edit here, signal, secure_profit, stop_loss
 """""""""
 ima_buy, ima_sell = technical.increasing_mavg(btc_df, short_term=1, long_term=20, band_width=0.01)
 bband_buy, bband_sell = technical.bollinger_band(btc_df, term=20, band_width=2)
@@ -46,13 +46,22 @@ rsi_buy, rsi_sell = technical.relative_strength_index(btc_df, term=14, follower=
 
 # Sample Signal 3
 signal_df = macd_buy - macd_sell
+secure_profit = 0.05
+stop_loss = -0.03
+transaction_fee_ratio = 0.01
 
 """""""""
 Edit here
 """""""""
 
 print('-'*80)
-simulation.simulate(10000000, btc_df=btc_df, signal_df=signal_df)
+simulation.simulate(
+    10000000,
+    btc_df=btc_df,
+    signal_df=signal_df,
+    stop_loss=stop_loss,
+    secure_profit=secure_profit,
+    per_transaction_fee_percent=transaction_fee_ratio)
 print('-'*80)
 
 signal_today = signal_df.iloc[-1].values[0]
