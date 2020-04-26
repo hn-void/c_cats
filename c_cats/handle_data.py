@@ -1,10 +1,13 @@
 import datetime
-
-import pandas as pd
+import json
 
 import requests
 from requests.exceptions import ConnectionError, Timeout, TooManyRedirects
-import json
+from matplotlib import pyplot as plt
+import pandas as pd
+from pandas.plotting import register_matplotlib_converters
+
+register_matplotlib_converters()
 
 
 def is_latest(file_name):
@@ -70,3 +73,20 @@ def read_latest_btc(file_name, symbol):
         data = json.load(input_file)
         values = data['data']
         return values[symbol]
+
+
+def show_historical(btc_df, start_date=None, end_date=None):
+    if start_date:
+        start_index = btc_df[btc_df['timestamp'] == start_date].index.values[0]
+    else:
+        start_index = 0
+    if end_date:
+        end_index = btc_df[btc_df['timestamp'] == end_date].index.values[0] + 1
+    else:
+        end_index = None
+    btc_df['time'] = btc_df['time'].apply(datetime.datetime.fromtimestamp)
+    plt.plot(btc_df['time'].iloc[start_index:end_index], btc_df['close'].iloc[start_index:end_index], label='JPY/BTC')
+    plt.xlabel('Date')
+    plt.ylabel('JPY')
+    plt.legend()
+    plt.show()
