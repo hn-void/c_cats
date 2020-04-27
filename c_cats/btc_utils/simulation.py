@@ -23,7 +23,7 @@ class BTCRecord:
             self.btc_dict[price] = amount
 
     def sub_record(self, amount):
-        record_sorted = sorted(self.btc_dict.items(), key=lambda x: x[0])
+        record_sorted = sorted(self.btc_dict.items(), key=lambda x: x[0], reverse=True)
         for key, value in record_sorted:
             if amount == 0.0:
                 break
@@ -40,7 +40,7 @@ class BTCRecord:
         amount = 0.0
         record_sorted = sorted(self.btc_dict.items(), key=lambda x: x[0])
         for key, value in record_sorted:
-            if (key - price) / price > ratio:
+            if (price - key) / key > ratio:
                 amount = amount + self.btc_dict[key]
                 self.btc_dict[key] = 0.0
         return amount
@@ -51,7 +51,7 @@ class BTCRecord:
         amount = 0.0
         record_sorted = sorted(self.btc_dict.items(), key=lambda x: x[0])
         for key, value in record_sorted:
-            if (key - price) / price < ratio:
+            if (price - key) / key < ratio:
                 amount = amount + self.btc_dict[key]
                 self.btc_dict[key] = 0.0
         return amount
@@ -86,6 +86,7 @@ def simulate(
     btc_df_cp['time_id'] = 0
 
     trading_count = 0
+    buy_and_hold = 0
     jpy = start_jpy
     btc = 0.0
     total_assets = start_jpy
@@ -95,6 +96,7 @@ def simulate(
     for index, row in btc_df_cp.iterrows():
 
         trading_flag = False
+        secure_stop_flag = False
 
         # flake8 does not support the walrus operator now
         # if stop_loss_amount := btc_record.stop_loss(int(row['close']), stop_loss) > 0.0:
@@ -103,19 +105,21 @@ def simulate(
             jpy = jpy + int(stop_loss_amount * int(row['close'] * (1 - per_transaction_fee_percent)))
             btc = btc - stop_loss_amount
             trading_flag = True
+            secure_stop_flag = True
         # if secure_profit_amount := btc_record.secure_profit(int(row['close']), secure_profit) > 0.0:
         secure_profit_amount = btc_record.secure_profit(int(row['close']), secure_profit)
         if secure_profit_amount > 0.0:
             jpy = jpy + int(secure_profit_amount * int(row['close'] * (1 - per_transaction_fee_percent)))
             btc = btc - secure_profit_amount
             trading_flag = True
-        if row['signal'] > 0:
+            secure_stop_flag = True
+        if row['signal'] > 0 and not secure_stop_flag:
             if jpy > int(row['signal'] * int(row['close'] * (1 + per_transaction_fee_percent))):
                 jpy = jpy - int(row['signal'] * int(row['close'] * (1 + per_transaction_fee_percent)))
                 btc = btc + row['signal']
                 btc_record.add_record(int(row['close']), row['signal'])
                 trading_flag = True
-        elif row['signal'] < 0:
+        elif row['signal'] < 0 and not secure_stop_flag:
             if btc > math.fabs(row['signal']):
                 jpy = jpy + int(math.fabs(row['signal']) * int(row['close'] * (1 - per_transaction_fee_percent)))
                 btc = btc + row['signal']
@@ -128,6 +132,7 @@ def simulate(
         btc_df_cp.loc[index, 'total'] = total_assets
         btc_df_cp.loc[index, 'buy_and_hold'] = buy_and_hold
         btc_df_cp.loc[index, 'time_id'] = datetime.datetime.fromtimestamp(row['time'])
+        # btc_record.print_record()
         print(
             'DATE:', row['timestamp'],
             '  PRICE:', row['close'],
@@ -138,8 +143,9 @@ def simulate(
             '  BTC:', btc,
             '  TOTAL:', total_assets,
             sep='')
-    print('START', 'JPY:', start_jpy, 'BTC:', 0.0, 'TOTAL:', start_jpy)
-    print('FINISH', 'JPY:', jpy, 'BTC:', btc, 'TOTAL:', total_assets)
+    print('[START]', '\tJPY:', start_jpy, '\tBTC:', 0.0, '\tTOTAL:', start_jpy)
+    print('[BUY-AND-HOLD]', '\tJPY:', remain_jpy, '\tBTC:', max_btc, '\tTOTAL:', buy_and_hold)
+    print('[ALGORITHM]', '\tJPY:', jpy, '\tBTC:', btc, '\tTOTAL:', total_assets)
     print(
         '[c_cats] Simulation Result:', (total_assets - start_jpy) / start_jpy * 100, '%',
         '  Trading Count:', trading_count, sep='')
