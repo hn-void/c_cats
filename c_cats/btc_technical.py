@@ -27,6 +27,7 @@ btc_df = pd.read_csv(FILE_NAME)
 """""""""
 Edit here, signal, secure_profit, stop_loss
 """""""""
+# Parameters from papers: Add citations later
 ima_buy, ima_sell = technical.increasing_mavg(btc_df, short_term=1, long_term=20, band_width=0.01)
 bband_buy, bband_sell = technical.bollinger_band(btc_df, term=20, band_width=2)
 macd_buy, macd_sell = technical.ma_convergence_divergence(btc_df, short_term=12, long_term=26)
@@ -45,9 +46,11 @@ rsi_buy, rsi_sell = technical.relative_strength_index(btc_df, term=14, follower=
 # signal_df = ima_buy + est_buy + rsi_buy - bband_sell - cci_sell - macd_sell
 
 # Sample Signal 3
-signal_df = macd_buy - macd_sell
-secure_profit = 0.05
-stop_loss = -0.03
+macd_buy, macd_sell = technical.ma_convergence_divergence(btc_df, short_term=14, long_term=21)
+signal_df = (macd_buy - macd_sell) * 3
+
+secure_profit = 0.3
+stop_loss = -0.05
 transaction_fee_ratio = 0.01
 
 """""""""
