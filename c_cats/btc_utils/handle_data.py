@@ -24,7 +24,7 @@ def get_historical_from_cryptocompare(
         comparison_symbol,
         limit=1,
         aggregate=1,
-        exchange="Bitflyer",
+        exchange="bitFlyer",
         allData="true"):
     url = "https://min-api.cryptocompare.com/data/histoday?fsym={}&tsym={}&limit={}&aggregate={}&allData={}"\
         .format(symbol.upper(), comparison_symbol.upper(), limit, aggregate, allData)
