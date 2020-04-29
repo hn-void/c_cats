@@ -4,9 +4,10 @@ import numpy as np
 
 # Used for making signals
 def isnull_to_num(df):
-    df[~pd.isnull(df)] = 1.0
-    df[pd.isnull(df)] = 0.0
-    return df
+    df_cp = df.copy()
+    df_cp[~pd.isnull(df_cp)] = 1.0
+    df_cp[pd.isnull(df_cp)] = 0.0
+    return df_cp
 
 
 def generate_marketsig(df, th_weak, th_string):
