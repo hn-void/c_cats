@@ -44,12 +44,12 @@ def increasing_mavg(df, short_term, long_term, band_width):
     return mavg_buy, mavg_sell
 
 
-def bollinger_band(df, term, band_width):
+def bollinger_band(df, term, coefficient):
     bband = df['close'].to_frame()
     mavg = df['close'].to_frame().rolling(window=term).mean()
     sigma = df['close'].to_frame().rolling(window=term).std()
-    bband_upper = mavg + sigma * band_width
-    bband_lower = mavg - sigma * band_width
+    bband_upper = mavg + sigma * coefficient
+    bband_lower = mavg - sigma * coefficient
     bband_buy = isnull_to_num(bband[bband < bband_lower])
     bband_sell = isnull_to_num(bband[bband > bband_upper])
     return bband_buy, bband_sell

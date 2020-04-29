@@ -29,7 +29,7 @@ Edit here, signal, secure_profit, stop_loss
 """""""""
 # Parameters from papers: Add citations later
 ima_buy, ima_sell = technical.increasing_mavg(btc_df, short_term=1, long_term=20, band_width=0.01)
-bband_buy, bband_sell = technical.bollinger_band(btc_df, term=20, band_width=2)
+bband_buy, bband_sell = technical.bollinger_band(btc_df, term=20, coefficient=2)
 macd_buy, macd_sell = technical.ma_convergence_divergence(btc_df, short_term=12, long_term=26)
 est_buy, est_sell = technical.ma_estrangement(btc_df, term=25, band_width=0.1)
 cci_buy, cci_sell = technical.commodity_channel_index(btc_df, term=21, follower=100, contrarian=200)
