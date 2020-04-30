@@ -77,7 +77,7 @@ def ma_estrangement(df, term, band_width):
     est_buy = est_rate[est_rate > (1 + band_width)]
     est_sell = est_rate[est_rate < (1 - band_width)]
     est_buy = isnull_to_num(est_buy)
-    est_sell = isnull_to_num(est_buy)
+    est_sell = isnull_to_num(est_sell)
     return est_buy, est_sell
 
 
