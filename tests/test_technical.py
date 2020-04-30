@@ -26,3 +26,11 @@ class TestTechnicalIndicators(TestCase):
         expected_sell = expected['sell_signal'].fillna(0.0)
         self.assertTrue(bband_buy['close'].equals(expected_buy))
         self.assertTrue(bband_sell['close'].equals(expected_sell))
+
+    def test_ma_estrangement(self):
+        est_buy, est_sell = technical.ma_estrangement(self.test_btc_df, term=7, band_width=0.05)
+        expected = pd.read_csv(os.path.dirname(__file__)+'/test_data/expected_data/cal_ma_estrangement.csv')
+        expected_buy = expected['buy_signal'].fillna(0.0)
+        expected_sell = expected['sell_signal'].fillna(0.0)
+        self.assertTrue(est_buy['close'].equals(expected_buy))
+        self.assertTrue(est_sell['close'].equals(expected_sell))
