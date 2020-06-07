@@ -94,9 +94,9 @@ def commodity_channel_index(df, term, follower, contrarian):
 def relative_strength_index(df, term, follower, contrarian):
     rsi_cp = df['close'].to_frame()
     cp_diff = rsi_cp.diff()
-    rsi_mother = np.fabs(cp_diff).rolling(window=term).sum()
-    rsi_child = cp_diff.mask(cp_diff < 0, 0).rolling(window=term).sum()
-    rsi = rsi_child / rsi_mother * 100
+    rsi_denominator = np.fabs(cp_diff).rolling(window=term).sum()
+    rsi_numerator = cp_diff.mask(cp_diff < 0, 0).rolling(window=term).sum()
+    rsi = rsi_numerator / rsi_denominator * 100
     rsi_buy = isnull_to_num(rsi[((rsi > 50) & (rsi < (50 + follower))) | (rsi < (50 - contrarian))])
     rsi_sell = isnull_to_num(rsi[((rsi < 50) & (rsi > (50 - follower))) | (rsi > (50 + contrarian))])
     return rsi_buy, rsi_sell
