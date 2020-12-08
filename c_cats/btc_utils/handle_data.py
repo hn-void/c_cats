@@ -11,11 +11,11 @@ register_matplotlib_converters()
 
 
 def is_latest(file_name):
-    latest_date = pd.read_csv(file_name).tail(1)
-    latest_date = latest_date.values.tolist()[0][8].split(' ')[0].replace('-', '')
+    latest_data = pd.read_csv(file_name).tail(1)
+    latest_date = latest_data['timestamp'].values[0].replace('-', '')
     date_today = str(datetime.date.today()).replace('-', '')
-    print('[c_cats] LAST_DATE: ' + latest_date)
-    print('[c_cats] TODAY_DATE: ' + date_today)
+    print('[c_cats] LAST_DATE: ' + latest_date, flush=True)
+    print('[c_cats] TODAY_DATE: ' + date_today, flush=True)
     return int(latest_date) == int(date_today)
 
 
