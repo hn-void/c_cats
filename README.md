@@ -2,6 +2,29 @@
 
 ```
 $ pwd
+Users/YOUR_NAME/c_cats/scripts
+
+$ ls
+get_data.py	show_chart.py	technical.py
+
+$ python3 get_data.py
+            time        high        low         open    ...
+0           foo         foo         foo         foo     ...
+...         ...         ...         ...         ...     ...
+3802        bar         bar         bar         bar     ...  
+
+[3803 rows x 10 columns]
+$ ls
+btc2usd.csv get_data.py	show_chart.py	technical.py
+
+$ python3 show_chart.py
+```
+![show_chart_ex.png](/docs/show_chart_ex.png)
+
+---
+
+```
+$ pwd
 /Users/your_name/c_cats/c_cats
 
 $ python3 btc_technical.py
