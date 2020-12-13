@@ -31,4 +31,9 @@ if __name__ == '__main__':
     mavg_indicator = tec.MavgIndicator(df=raw_indicator.df)
     list_indicators.append(mavg_indicator)
 
+    bband_upper_indicator = tec.BBandUpperIndicator(df=raw_indicator.df, color='c', alpha=0.5)
+    bband_lower_indicator = tec.BBandLowerIndicator(df=raw_indicator.df, color='c', alpha=0.5)
+    list_indicators.append(bband_upper_indicator)
+    list_indicators.append(bband_lower_indicator)
+
     show_chart(list_indicators=list_indicators)
