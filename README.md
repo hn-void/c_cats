@@ -1,5 +1,8 @@
-# c_cats
+### c_cats
 
+Scripts for fetching cryptocurrency data and generating chart images, suitable for presentation use.
+
+### Usage
 ```
 $ pwd
 Users/YOUR_NAME/c_cats/scripts
@@ -14,6 +17,7 @@ $ python3 get_data.py
 3802        bar         bar         bar         bar     ...  
 
 [3803 rows x 10 columns]
+
 $ ls
 btc2usd.csv get_data.py	show_chart.py	technical.py
 
@@ -22,6 +26,8 @@ $ python3 show_chart.py
 ![show_chart_ex.png](/docs/show_chart_ex.png)
 
 ---
+
+### You can easily try System Trading
 
 ```
 $ pwd
