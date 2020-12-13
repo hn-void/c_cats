@@ -21,6 +21,15 @@ def bband_lower(df, term, symbol='close'):
     return df_bband_lower
 
 
+def bband(df, term, symbol='close'):
+    df_mavg = df[symbol].copy().to_frame().rolling(window=term).mean()
+    df_sigma = df[symbol].copy().to_frame().rolling(window=term).std()
+    df_bband = df.copy()
+    df_bband['upper'] = df_mavg + 2 * df_sigma
+    df_bband['lower'] = df_mavg - 2 * df_sigma
+    return df_bband
+
+
 class TechnicalIndicator:
 
     def __init__(self, df=None, name=None, color=None, alpha=None):
@@ -40,6 +49,7 @@ class MavgIndicator(TechnicalIndicator):
 
 
 class BBandUpperIndicator(TechnicalIndicator):
+
     def __init__(self, df, term=26, color=None, alpha=None):
         self.df = bband_upper(df=df, term=term)
         self.name = 'Bollinger Band Upper: term=' + str(term)
@@ -48,8 +58,22 @@ class BBandUpperIndicator(TechnicalIndicator):
 
 
 class BBandLowerIndicator(TechnicalIndicator):
+
     def __init__(self, df, term=26, color=None, alpha=None):
         self.df = bband_lower(df=df, term=term)
         self.name = 'Bollinger Band Lower: term=' + str(term)
         self.color = color
         self.alpha = alpha
+
+
+class BBandIndicator(TechnicalIndicator):
+
+    def __init__(self, df, term=26, color=None, alpha=None):
+        self.df = bband(df=df, term=term)
+        self.name = 'Bollinger Band: term=' + str(term)
+        self.color = color
+        self.alpha = alpha
+        if self.alpha:
+            self.subalpha = self.alpha / 2
+        else:
+            self.subalpha = None
