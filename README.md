@@ -24,6 +24,7 @@ btc2usd.csv get_data.py	show_chart.py	technical.py
 $ python3 show_chart.py
 ```
 ![show_chart_ex.png](/docs/show_chart_ex.png)
+![show_chart_ex2.png](/docs/show_chart_ex2.png)
 
 ---
 
